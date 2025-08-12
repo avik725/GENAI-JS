@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tokenizer</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <div class="w-screen h-screen flex justify-center items-center">
+      <div class="rounded-lg shadow-xl flex flex-col w-100 h-100 p-4">
+        <div class="input-div mb-3">
+          <label for="content_string"></label>
+          <textarea
+            type="text"
+            name="content_string"
+            id="content_string"
+            placeholder="Enter Some Text Here..."
+            class="block w-full resize-none h-[100px] min-w-0 mb-3 py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none border border-gray-400 rounded-lg sm:text-sm/6"
+          ></textarea>
+          <button
+            class="clearBtn px-3 py-2 bg-zinc-300 rounded-lg cursor-pointer"
+            type="button"
+          >
+            Clear
+          </button>
+        </div>
+        <div class="flex items-center gap-4 mb-3">
+          <div class="tokens">
+            <p class="font-bold text-sm">Tokens</p>
+            <p class="no_of_token text-2xl">0</p>
+          </div>
+          <div class="characters">
+            <p class="font-bold text-sm">Characters</p>
+            <p class="no_of_characters text-2xl">0</p>
+          </div>
+        </div>
+        <div class="output-div overflow-hidden bg-neutral-100 w-full rounded-lg grow p-4">
+          <!-- Output will get here -->
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    let textInput = document.querySelector("#content_string");
+
+    textInput.addEventListener("input", () => {
+      let characters = textInput.value.length;
+      document.querySelector(".no_of_characters").innerText = characters;
+      const regex = /\w+|[^\w\s]|\s+/g;
+      const matches = textInput.value.match(regex) || [];
+
+      if (matches.length > 1) {
+        showOutput(matches)
+      } else if (matches.length === 0) {
+        document.querySelector(".no_of_token").innerText = 0;
+        document.querySelector(".no_of_characters").innerText = 0;
+      } else {
+
+        let result = [];
+        let start = 0;
+        let partsCount = Math.floor(Math.random() * textInput.value.length);
+
+        const pointToSplit = [];
+        for (let i = 0; i < partsCount - 1; i++) {
+          let point;
+          do {
+            point =
+              Math.floor(Math.random() * (textInput.value.length - 1)) + 1;
+          } while (pointToSplit.includes(point));
+          pointToSplit.push(point);
+        }
+        pointToSplit.sort((a, b) => a - b);
+
+        pointToSplit.forEach((point) => {
+          result.push(textInput.value.slice(start, point));
+          start = point;
+        });
+        result.push(textInput.value.slice(start));
+        showOutput(result);
+      }
+    });
+
+    function showOutput(tokensArray) {
+      document.querySelector(".no_of_token").innerText = tokensArray.length;
+      document.querySelector(".output-div").innerHTML = "";
+      tokensArray?.map((token) => {
+        let colorString = Math.floor(Math.random() * 16777215)
+          .toString(16)
+          .padStart(6, "0");
+
+        document.querySelector(
+          ".output-div"
+        ).innerHTML += `<span class="m-0 p-0" style="background-color: #${colorString};display:inline-flex;flex-wrap:wrap;">${token}</span>`;
+      });
+    }
+
+    function generateTokensFromCharacters(tokensArray){
+        //we will replace the strings with the ASCII values of their characters
+        let newTokensArray = tokensArray?.map((token)=>{
+            
+        })
+    }
+
+    let clearBtn = document.querySelector(".clearBtn");
+    clearBtn.addEventListener("click", () => {
+      textInput.value = "";
+      document.querySelector(".output-div").innerHTML = "";
+      let event = new Event("input");
+      textInput.dispatchEvent(event);
+    });
+  </script>
+</html>
