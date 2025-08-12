@@ -61,7 +61,12 @@
       const matches = textInput.value.match(regex) || [];
 
       if (matches.length > 1) {
-        showOutput(matches);
+        if(textOrTokens){
+          showOutput(matches);
+        } else {
+          let resultInToken = generateTokensFromCharacters(matches)
+          showOutput(resultInToken)
+        }
       } else if (matches.length === 0) {
         document.querySelector(".no_of_token").innerText = 0;
         document.querySelector(".no_of_characters").innerText = 0;
