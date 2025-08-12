@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="w-screen h-screen flex justify-center items-center">
-      <div class="rounded-lg shadow-xl flex flex-col w-100 h-100 p-4">
+      <div class="rounded-lg shadow-xl flex flex-col w-100 h-[450px] p-4">
         <div class="input-div mb-3">
           <label for="content_string"></label>
           <textarea
@@ -35,15 +35,24 @@
             <p class="no_of_characters text-2xl">0</p>
           </div>
         </div>
-        <div class="output-div overflow-hidden bg-neutral-100 w-full rounded-lg grow p-4">
+        <div
+          class="output-div overflow-hidden bg-neutral-100 w-full rounded-lg grow p-4"
+        >
           <!-- Output will get here -->
         </div>
+       <span class="p-2 bg-zinc-200 inline-block w-fit rounded-lg mt-3">
+        <button id="textBtn" class="bg-zinc-50 rounded-lg cursor-pointer px-2 py-1 me-1">Text</button>
+        <button id="tokenBtn" class="bg-zinc-50 rounded-lg cursor-pointer px-2 py-1">Token</button>
+       </span>
       </div>
     </div>
   </body>
 
   <script>
     let textInput = document.querySelector("#content_string");
+    let textBtn = document.querySelector("#textBtn");
+    let tokenBtn = document.querySelector("#tokenBtn");
+    let textOrTokens = true;
 
     textInput.addEventListener("input", () => {
       let characters = textInput.value.length;
@@ -52,12 +61,11 @@
       const matches = textInput.value.match(regex) || [];
 
       if (matches.length > 1) {
-        showOutput(matches)
+        showOutput(matches);
       } else if (matches.length === 0) {
         document.querySelector(".no_of_token").innerText = 0;
         document.querySelector(".no_of_characters").innerText = 0;
       } else {
-
         let result = [];
         let start = 0;
         let partsCount = Math.floor(Math.random() * textInput.value.length);
@@ -78,29 +86,61 @@
           start = point;
         });
         result.push(textInput.value.slice(start));
-        showOutput(result);
+        if(textOrTokens){
+          showOutput(result);
+        } else {
+          let resultInToken = generateTokensFromCharacters(result)
+          showOutput(resultInToken)
+        }
       }
     });
 
     function showOutput(tokensArray) {
       document.querySelector(".no_of_token").innerText = tokensArray.length;
       document.querySelector(".output-div").innerHTML = "";
-      tokensArray?.map((token) => {
-        let colorString = Math.floor(Math.random() * 16777215)
-          .toString(16)
-          .padStart(6, "0");
+      if (textOrTokens) {
+        tokensArray?.map((token) => {
+          let colorString = Math.floor(Math.random() * 16777215)
+            .toString(16)
+            .padStart(6, "0");
 
+          document.querySelector(
+            ".output-div"
+          ).innerHTML += `<span class="m-0 p-0" style="background-color: #${colorString};display:inline-flex;flex-wrap:wrap;">${token}</span>`;
+        });
+      } else {
+        let codeString = "";
+        tokensArray?.forEach((token, index) => {
+          if (index > 0 && index < tokensArray.length) codeString += ", ";
+          codeString += `${token}`;
+        });
         document.querySelector(
           ".output-div"
-        ).innerHTML += `<span class="m-0 p-0" style="background-color: #${colorString};display:inline-flex;flex-wrap:wrap;">${token}</span>`;
-      });
+        ).innerHTML += `<span class="m-0 p-0">[ ${codeString} ]</span>`;
+      }
     }
 
-    function generateTokensFromCharacters(tokensArray){
-        //we will replace the strings with the ASCII values of their characters
-        let newTokensArray = tokensArray?.map((token)=>{
-            
-        })
+    textBtn.addEventListener("click", () => {
+      textOrTokens = true;
+      let event = new Event("input");
+      textInput.dispatchEvent(event);
+    });
+    tokenBtn.addEventListener("click", () => {
+      textOrTokens = false;
+      let event = new Event("input");
+      textInput.dispatchEvent(event);
+    });
+
+    function generateTokensFromCharacters(tokensArray) {
+      //we will replace the strings with the ASCII values of their characters
+      let newTokensArray = tokensArray?.map((token) => {
+        let charcode = "";
+        for (let i = 0; i < token.length; i++) {
+          charcode += token.charCodeAt(i);
+        }
+        return charcode;
+      });
+      return newTokensArray;
     }
 
     let clearBtn = document.querySelector(".clearBtn");
