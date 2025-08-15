@@ -58,35 +58,38 @@ function ChatPage() {
 
           <div className="grid grid-cols-12 gap-3 grow mt-4">
             <div className="col-span-4 border border-white/30 bg-white/5 backdrop-blur-lg rounded-4xl p-4">
-              <div className="flex justify-start gap-5 px-4 py-2">
-                <span className="rounded-full w-[120px] h-[120px] inline-block overflow-hidden">
-                  <img
-                    src={currentPersona.image}
-                    alt="image"
-                    className="w-full h-full rounded-full"
-                  />
-                </span>
-                <div className="flex flex-col items-start justify-center mb-4">
-                  <h5 className="orbitron-600 text-2xl text-white">
-                    {currentPersona.name}
-                  </h5>
-                  
-                  <p className="roboto-600 bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
-                    {currentPersona.profession}
+              <div className="p-[2px] bg-gradient-to-r from-pink-500/80 to-red-500/80 rounded-4xl mb-3">
+                <div className="bg-white/10 border border-white/40 flex justify-start gap-5 px-3 py-2 rounded-4xl">
+                  <span className="rounded-full w-[120px] h-[120px] inline-block overflow-hidden">
+                    <img
+                      src={currentPersona.image}
+                      alt="image"
+                      className="w-full h-full rounded-full"
+                    />
+                  </span>
+                  <div className="flex flex-col items-start justify-center mb-4">
+                    <h5 className="orbitron-600 text-2xl text-white">
+                      {currentPersona.name}
+                    </h5>
+
+                    <p className="roboto-600 bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
+                      {currentPersona.profession}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-[2px] bg-gradient-to-r from-pink-500/80 to-red-500/80 rounded-4xl">
+                <div className="bg-white/10 border border-white/40 rounded-4xl px-3 py-2">
+                  <div className="text-white text-start mb-4">
+                    {currentPersona?.introBulletPoints?.map((point) => (
+                      <li className="capitalize">{point}</li>
+                    ))}
+                  </div>
+                  <p className="text-justify text-white">
+                    {currentPersona?.message}
                   </p>
                 </div>
-                
               </div>
-              <div className="text-white text-start mb-4">
-                {currentPersona?.introBulletPoints?.map((point)=>(
-                  <li className="capitalize">
-                    {point}
-                  </li>
-                ))}
-              </div>
-              <p className="text-justify text-white">
-                  {currentPersona?.message}
-                </p>
             </div>
 
             <div className="col-span-8 border border-white/30 bg-white/5 backdrop-blur-lg rounded-4xl">

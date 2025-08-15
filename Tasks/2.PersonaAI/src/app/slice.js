@@ -11,7 +11,6 @@ const initialState = {
       profession: "Educator & Youtuber",
       image: Hitesh,
       introBulletPoints: [
-        "Retired from Corporate",
         "Full Time Youtube",
         "ex-founder of LCO",
         "Senior Director at Physics Wallah",
