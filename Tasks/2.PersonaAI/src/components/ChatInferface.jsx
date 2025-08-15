@@ -96,7 +96,7 @@ function ChatInterface({ currentPersona }) {
         </div>
         <div className="col-span-12 lg:col-span-5 md:flex gap-3 relative m-0 p-0">
           {modelDropdown && (
-            <div className="absolute p-2 lg:top-[-360px] md:top-[-340px] top-[-340px] rounded-4xl z-10 bg-gradient-to-r from-pink-500 to-red-500">
+            <div className="absolute p-2 top-[-230px] rounded-4xl z-10 bg-gradient-to-r from-pink-500 to-red-500">
               {modelsAvailable?.map((model, index) => (
                 <button
                   onClick={() => {
