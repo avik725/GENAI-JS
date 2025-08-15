@@ -8,8 +8,8 @@ function ChatInterface({ currentPersona }) {
     { model: "gpt-4.1-mini", display_name: "GPT 4.1 Mini" },
     { model: "gpt-4.1", display_name: "GPT 4.1" },
     { model: "gpt-3.5-turbo", display_name: "GPT 3.5 Turbo" },
-    { model: "gemini-1.5", display_name: "Gemini 1.5" },
-    { model: "gemini-2.0", display_name: "Gemini 2.0" },
+    // { model: "gemini-1.5", display_name: "Gemini 1.5" },
+    // { model: "gemini-2.0", display_name: "Gemini 2.0" },
     { model: "gemini-2.0-flash", display_name: "Gemini 2.0 Flash" },
   ];
   const [modelDropdown, setModelDropdown] = useState(false);
@@ -44,9 +44,9 @@ function ChatInterface({ currentPersona }) {
     setModel({ model: "gpt-4.1-mini", display_name: "GPT 4.1 Mini" });
   }, []);
 
-  // useEffect(() => {
-  //   setAllMessages([]);
-  // }, [currentPersona]);
+  useEffect(() => {
+    setAllMessages([]);
+  }, [currentPersona]);
 
   return (
     <div className="flex flex-col w-full h-full pb-4">
