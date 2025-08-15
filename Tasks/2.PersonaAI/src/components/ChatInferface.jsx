@@ -44,13 +44,13 @@ function ChatInterface({ currentPersona }) {
     setModel({ model: "gpt-4.1-mini", display_name: "GPT 4.1 Mini" });
   }, []);
 
-  useEffect(() => {
-    setAllMessages([]);
-  }, [currentPersona]);
+  // useEffect(() => {
+  //   setAllMessages([]);
+  // }, [currentPersona]);
 
   return (
     <div className="flex flex-col w-full h-full pb-4">
-      <div className="lg:h-[620px] xl:h-[480px] md:h-[400px] h-[300px] overflow-y-auto scrollbar-gradient content-end px-6 mt-3 mb-2 me-2">
+      <div className="lg:h-[480px] xl:h-[480px] md:h-[400px] h-[300px] overflow-y-auto scrollbar-gradient content-end px-6 mt-3 mb-2 me-2">
         {allMessages?.map((message) => {
           if (message.role === "assistant") {
             return (
