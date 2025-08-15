@@ -94,9 +94,9 @@ function ChatInterface({ currentPersona }) {
             />
           </form>
         </div>
-        <div className="col-span-12 lg:col-span-5 flex gap-3 relative m-0 p-0">
+        <div className="col-span-12 lg:col-span-5 md:flex gap-3 relative m-0 p-0">
           {modelDropdown && (
-            <div className="absolute p-2 top-[-360px] rounded-4xl z-10 bg-gradient-to-r from-pink-500 to-red-500">
+            <div className="absolute p-2 lg:top-[-360px] md:top-[-340px] top-[-340px] rounded-4xl z-10 bg-gradient-to-r from-pink-500 to-red-500">
               {modelsAvailable?.map((model, index) => (
                 <button
                   onClick={() => {
@@ -114,7 +114,7 @@ function ChatInterface({ currentPersona }) {
           )}
           <button
             onClick={() => setModelDropdown((prev) => !prev)}
-            className="capitalize px-4 py-4 cursor-pointer grow rounded-full bg-gradient-to-r from-pink-500 to-red-500 shadow-lg shadow-pink-500/50 text-white orbitron-600"
+            className="capitalize px-4 w-full md:w-auto mb-3 md:mb-0 lg:mb-0 lg:w-auto py-4 cursor-pointer md:grow lg:grow rounded-full bg-gradient-to-r from-pink-500 to-red-500 shadow-lg shadow-pink-500/50 text-white orbitron-600"
           >
             {model.display_name}
             {<i className="fa-solid fa-chevron-up ms-2"></i>}
@@ -122,7 +122,7 @@ function ChatInterface({ currentPersona }) {
 
           <button
             onClick={() => sendMessage()}
-            className="px-6 py-4 md:w-1/3 cursor-pointer rounded-full bg-gradient-to-r from-pink-500 to-red-500 shadow-lg shadow-pink-500/50 text-white orbitron-600"
+            className="px-6 py-4 md:w-1/3 w-full lg:w-auto cursor-pointer rounded-full bg-gradient-to-r from-pink-500 to-red-500 shadow-lg shadow-pink-500/50 text-white orbitron-600"
           >
             Send
           </button>

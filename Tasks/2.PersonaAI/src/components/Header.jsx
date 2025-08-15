@@ -8,7 +8,7 @@ function Header() {
 
   return (
     <>
-      <section className="px-6 py-4">
+      <section className="px-6 py-4 h-[100px]">
         <div className="flex justify-between items-center bg-white/10 backdrop-blur-xs border border-white/20 rounded-full px-10 py-4">
           <div className="inline-block cursor-pointer" onClick={()=> navigate("/")}>
             <p className="orbitron-600 text-2xl bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
