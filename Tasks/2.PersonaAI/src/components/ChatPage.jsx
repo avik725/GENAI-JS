@@ -57,17 +57,17 @@ function ChatPage() {
           </div>
 
           <div className="grid grid-cols-12 gap-3 grow mt-4">
-            <div className="col-span-4 border border-white/30 bg-white/5 backdrop-blur-lg rounded-4xl p-4">
-              <div className="p-[2px] bg-gradient-to-r from-pink-500/80 to-red-500/80 rounded-4xl mb-3">
+            <div className="lg:col-span-4 col-span-12 border border-white/30 bg-white/5 backdrop-blur-lg rounded-4xl p-4">
+              <div className="p-[2px] bg-gradient-to-r from-pink-500/80 to-red-500/80 rounded-4xl lg:mb-3">
                 <div className="bg-white/10 border border-white/40 flex justify-start gap-5 px-3 py-2 rounded-4xl">
-                  <span className="rounded-full w-[120px] h-[120px] inline-block overflow-hidden">
+                  <span className="rounded-full lg:w-[120px] lg:h-[120px] md:w-[110px] md:h-[110px] hidden  md:inline-block overflow-hidden">
                     <img
                       src={currentPersona.image}
                       alt="image"
                       className="w-full h-full rounded-full"
                     />
                   </span>
-                  <div className="flex flex-col items-start justify-center mb-4">
+                  <div className="flex flex-col w-full md:w-auto lg:w-auto md:items-start lg:items-start justify-center md:mb-4 lg:mb-4">
                     <h5 className="orbitron-600 text-2xl text-white">
                       {currentPersona.name}
                     </h5>
@@ -78,11 +78,11 @@ function ChatPage() {
                   </div>
                 </div>
               </div>
-              <div className="p-[2px] bg-gradient-to-r from-pink-500/80 to-red-500/80 rounded-4xl">
+              <div className="hidden lg:block p-[2px] bg-gradient-to-r from-pink-500/80 to-red-500/80 rounded-4xl">
                 <div className="bg-white/10 border border-white/40 rounded-4xl px-3 py-2">
                   <div className="text-white text-start mb-4">
                     {currentPersona?.introBulletPoints?.map((point) => (
-                      <li className="capitalize">{point}</li>
+                      <li key={point} className="capitalize">{point}</li>
                     ))}
                   </div>
                   <p className="text-justify text-white">
@@ -92,7 +92,7 @@ function ChatPage() {
               </div>
             </div>
 
-            <div className="col-span-8 border border-white/30 bg-white/5 backdrop-blur-lg rounded-4xl">
+            <div className="lg:col-span-8 col-span-12 border border-white/30 bg-white/5 backdrop-blur-lg rounded-4xl">
               <ChatInterface currentPersona={currentPersona} />
             </div>
           </div>

@@ -1,3 +1,4 @@
+import "dotenv/config"
 import OpenAI from "openai";
 
 export const config = {
@@ -118,7 +119,13 @@ export default async function handler(req, res) {
     ];
 
     const client = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
+      apiKey:
+        req.body.model.includes("gemini")
+          ? process.env.GOOGLE_API_KEY
+          : process.env.OPENAI_API_KEY,
+      ...(req.body.model.includes("gemini") && {
+        baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
+      }),
     });
 
     const current_system_prompt = system_prompts.find(
@@ -130,7 +137,7 @@ export default async function handler(req, res) {
     }
 
     const response = await client.chat.completions.create({
-      model: "gpt-4.1-mini",
+      model: req.body.model,
       messages: [
         {
           role: "system",
