@@ -16,8 +16,8 @@ function ChatPage() {
 
   return (
     <>
-      <section className="px-6 pb-6 grow">
-        <div className="flex flex-col bg-white/10 backdrop-blur-xs border border-white/20 rounded-4xl p-6 text-center h-full">
+      <section className="px-3 md:px-6 lg:px-6 pb-6 grow">
+        <div className="flex flex-col bg-white/10 backdrop-blur-xs border border-white/20 rounded-4xl p-3 md:p-6 text-center h-full">
           <div className="relative">
             <button
               onClick={() => {
