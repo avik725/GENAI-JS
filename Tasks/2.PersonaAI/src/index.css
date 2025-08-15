@@ -38,11 +38,10 @@
   font-weight: 600;
 }
 
-/* global.css (or src/index.css) */
 .scrollbar-gradient {
   /* Firefox */
   scrollbar-width: thin;
-  scrollbar-color: #ec4899 transparent; /* pink-500 thumb on transparent track */
+  scrollbar-color: #ec4899 transparent;
 }
 
 /* Chrome/Safari/Edge */
@@ -58,9 +57,9 @@
     to right,
     #ec4899,
     #ef4444
-  ); /* pink-500 → red-500 */
+  );
   border-radius: 9999px;
-  border: 2px solid transparent; /* gives some breathing room */
+  border: 2px solid transparent;
   background-clip: padding-box;
 }
 .scrollbar-gradient::-webkit-scrollbar-thumb:hover {
@@ -68,5 +67,5 @@
     to right,
     #db2777,
     #dc2626
-  ); /* pink-600 → red-600 hover */
+  ); 
 }
