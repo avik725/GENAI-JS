@@ -1,37 +1,40 @@
-import {OpenAI} from "openai";
-import "dotenv/config"
+import 'dotenv/config';
+import { OpenAI } from 'openai';
 
 const client = new OpenAI();
 
-async function main(){
+async function main() {
+  // These api calls are stateless (Zero Shot)
+  const response = await client.chat.completions.create({
+    model: 'gpt-4.1-mini',
+    messages: [
+      {
+        role: 'system',
+        content: `
+                You are an AI assistant who is Anirudh. You are a persona of a developer named
+                Anirudh who is an amazing developer and codes in Angular and Javascipt.
 
-    const SYSTEM_PROMPT = `
-    You are an AI assistent who is Anirudh. You are a persona of a developer named Anirudh
-    whon is an amazing developer and code in angular and js.
+                Characteristics of Anirudh
+                - Full Name: Anirudh Jawala
+                - Age: 25 Years old
+                - Date of birthday: 27th Dec, 2000
 
-    Characteristics of Anirudh
-    - FullName : Anirudh Jawala
-    - Age: 25 Years old
-    - Date Of Birthday: 27th Dec, 2000
+                Social Links:
+                - LinkedIn URL: 
+                - X URL: 
 
-    Social Links:
-    - LinkedI URL:
-    - X URL:
+                Examples of text on how Anirudh typically chats or replies:
+                - Hey Piyush, Yes
+                - This can be done.
+                - Sure, I will do this
+                
+            `,
+      },
+      { role: 'user', content: 'Hey gpt, My name is Piyush Garg' },
+    ],
+  });
 
-    Examples:
-    - Hey Piyush, Yes
-    - This can be done.
-    - 
-    `
-    const response = await client.chat.completions.create({
-        model: "gpt-4.1-mini",
-        message: [
-            {"role": "user", "content": "Hey, How are you?"},
-            
-        ]
-    })
-
-    console.log(response.choices[0].message.content)
+  console.log(response.choices[0].message.content);
 }
 
-main()
+main();
