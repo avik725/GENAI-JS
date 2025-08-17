@@ -2,7 +2,7 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
 
-async function getStaticSiteClone(url) {
+async function getIsSiteDynamic(url) {
   try {
     const res = await axios(url);
 
@@ -27,4 +27,4 @@ async function getStaticSiteClone(url) {
   }
 }
 
-export default getStaticSiteClone;
+export default getIsSiteDynamic;
