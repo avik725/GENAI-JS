@@ -1,7 +1,13 @@
 import "dotenv/config";
 import { OpenAI } from "openai";
+import readline from "node:readline";
 import getStaticSiteClone from "./utils/getStaticSiteClone.js";
 import getIsSiteDynamic from "./utils/getIsSiteDynamic.js";
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
 const TOOL_MAP = {
   getIsSiteDynamic: getIsSiteDynamic,
@@ -12,7 +18,14 @@ const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-async function main() {
+function main() {
+  rl.question(`Enter the website url you want to clone : `, (inputString) => {
+    if (typeof inputString === "string") AIFunction(inputString);
+    rl.close();
+  });
+}
+
+async function AIFunction(userMessage) {
   const SYSTEM_PROMPT = `
     You are AI assistant who works on START, THINK and OUTPUT format.
     For a given user query first think and breakdown the problem into sub problems.
@@ -82,7 +95,7 @@ async function main() {
     },
     {
       role: "user",
-      content: "Can you clone this site for me https://www.piyushgarg.dev/",
+      content: userMessage,
     },
   ];
 
@@ -120,7 +133,9 @@ async function main() {
         continue;
       }
 
-      const responseFromTool = await TOOL_MAP[toolToCall](parsedContent.tool_input);
+      const responseFromTool = await TOOL_MAP[toolToCall](
+        parsedContent.tool_input
+      );
       // console.log(
       //   `🛠️: ${toolToCall}(${parsedContent.tool_input}) = `,
       //   responseFromTool
