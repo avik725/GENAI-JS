@@ -118,15 +118,6 @@ export default async function handler(req, res) {
       },
     ];
 
-    // const client = new OpenAI({
-    //   apiKey: req.body.model.includes("gemini")
-    //     ? process.env.GOOGLE_API_KEY
-    //     : process.env.OPENAI_API_KEY,
-    //   ...(req.body.model.includes("gemini") && {
-    //     baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
-    //   }),
-    // });
-
     let client;
     if (req.body.model.includes("gemini")) {
       client = new OpenAI({
@@ -136,8 +127,6 @@ export default async function handler(req, res) {
     } else {
       client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     }
-
-    console.log("nkqjdanc", req.body.model.includes("gemini"));
 
     const current_system_prompt = system_prompts.find(
       (prompt) => prompt.id === req.body.id
