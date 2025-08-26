@@ -20,3 +20,10 @@ React Application Deployed on Vercel.
 Link : https://2-persona-ai.vercel.app/
 
 Github Folder Path : Task -> 2.PersonaAI
+
+# 3. AI Reference Assistant (RAG Application)
+
+Next JS Deployed on Vercel. 
+Link : https://ai-reference-assistant.vercel.app/
+
+Github Folder Path : Task -> 4.ai_reference_assistant
